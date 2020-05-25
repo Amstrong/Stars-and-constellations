@@ -8,7 +8,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 
 def starscos():
-    #Tomar de star.txt y guardar cada una de las estrellas.
+    #Guardar las estrellas de Stars.txt.
     archivo = open("stars.txt", "r")
     stars = []
     mStars = {}
@@ -24,7 +24,7 @@ def starscos():
             stars.append(Star(data[0],data[1],data[2],data[3],data[4],data[5],None))
     archivo.close()
 
-    #Tomar de la carpeta las constelacciones y almacenarlas en un Diccionario.
+    #Guardar todas las posiciones en Diccionarios.
     basepath = 'constelaciones/'
     constelaciones = {}
     for entry in os.listdir(basepath):
@@ -101,7 +101,7 @@ logger = logging.getLogger(__name__)
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 
-def listcons(update, context):
+def listaconstelaciones(update, context):
     s = 'Las constelaciones son:'
     for key in sky.constelaciones:
         s += "\n - /"+key
@@ -225,7 +225,7 @@ def help(update, context):
     '• /constelaciones o escribe "constelaciones" o "todas" para visualizar las es'+
     'trellas y constelaciones.\n• Si mandas un mensaje con el nombre de la'+
     'constelación podrás ver todas las estrellas y en su defecto la constelación.'+
-    '\n• /listcons : lista de costelaciones que te puedo mostrar.')
+    '\n• /listaconstelaciones : lista de costelaciones que te puedo mostrar.')
     update.message.reply_text(s)
 
 def echo(update, context):
@@ -278,7 +278,7 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
-    dp.add_handler(CommandHandler("listcons", listcons))
+    dp.add_handler(CommandHandler("listaconstelaciones", listaconstelaciones))
     dp.add_handler(CommandHandler("constelaciones", constelaciones))
     dp.add_handler(CommandHandler("estrellas", estrellas))
     dp.add_handler(CommandHandler("boyero", boyero))
